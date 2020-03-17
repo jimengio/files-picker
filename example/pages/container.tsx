@@ -6,18 +6,22 @@ import { HashRedirect, findRouteTarget } from "@jimengio/ruled-router/lib/dom";
 import { genRouter, GenRouterTypeMain } from "controller/generated-router";
 import { ISidebarEntry, DocSidebar } from "@jimengio/doc-frame";
 
+import PageBaseUpload from "./base-upload";
+import PageUploadWrapper from "./upload-wrapper";
+
 let items: ISidebarEntry[] = [
-  {
-    title: "Intro",
-    path: genRouter.$.name,
-  },
+  { title: "Base upload", path: genRouter.baseUpload.name },
+  { title: "Upload wrapper", path: genRouter.uploadWrapper.name },
 ];
 
 const renderChildPage = (routerTree: GenRouterTypeMain) => {
   switch (routerTree?.name) {
-    case "home":
+    case "base-upload":
+      return <PageBaseUpload />;
+    case "upload-wrapper":
+      return <PageUploadWrapper />;
     default:
-      return <HashRedirect to={genRouter.$.path()} noDelay />;
+      return <HashRedirect to={genRouter.baseUpload.path()} noDelay />;
   }
 
   return <div>NOTHING</div>;

@@ -1,6 +1,6 @@
 {
   "name": "@jimengio/files-picker",
-  "version": "0.0.1",
+  "version": "0.0.1-a1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "author": "JimengIO",
   "license": "MIT",
   "devDependencies": {
+    "@jimengio/api-base": "^0.3.1",
     "@jimengio/ci-progress-webpack-plugin": "^0.1.0",
     "@jimengio/doc-frame": "^0.1.11",
     "@jimengio/flex-styles": "^0.1.6",
@@ -29,6 +30,7 @@
     "@types/prettier": "^1.19.0",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "antd": "3.x.x",
     "cache-loader": "^4.1.0",
     "css-loader": "^3.4.2",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
@@ -37,6 +39,7 @@
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-tags-plugin": "^2.0.17",
     "http-server": "^0.12.1",
+    "mime-types": "^2.1.26",
     "mini-css-extract-plugin": "^0.9.0",
     "prettier": "^1.19.1",
     "style-loader": "^1.1.3",
