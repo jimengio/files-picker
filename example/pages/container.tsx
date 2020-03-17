@@ -37,7 +37,7 @@ let Container: FC<{ router: GenRouterTypeMain }> = React.memo((props) => {
   return (
     <div className={cx(fullscreen, row, styleContainer)}>
       <DocSidebar
-        title="Workflow"
+        title="Files Picker"
         currentPath={props.router.name}
         onSwitch={(item) => {
           onSwitchPage(item.path);

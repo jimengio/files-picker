@@ -1,28 +1,10 @@
-## Workflow
+## Files Picker
 
-> A project template based on TypeScript, React, immer, emotion, rex, ruled-router...
+> UI component of selecting files
 
 ### Usage
 
-Dev:
-
-```bash
-yarn dll
-yarn dev
-```
-
-Compile library:
-
-```bash
-yarn compile
-```
-
-Release:
-
-```bash
-yarn release
-# yarn serve
-```
+Feature _TODO_
 
 ### Workflow
 
