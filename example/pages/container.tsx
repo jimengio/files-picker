@@ -8,10 +8,14 @@ import { ISidebarEntry, DocSidebar } from "@jimengio/doc-frame";
 
 import PageBaseUpload from "./base-upload";
 import PageUploadWrapper from "./upload-wrapper";
+import DraggerUpload from "./dragger-upload";
+
+import "antd/dist/antd.min.css";
 
 let items: ISidebarEntry[] = [
   { title: "Base upload", path: genRouter.baseUpload.name },
   { title: "Upload wrapper", path: genRouter.uploadWrapper.name },
+  { title: "Dragger upload", path: genRouter.draggerUpload.name },
 ];
 
 const renderChildPage = (routerTree: GenRouterTypeMain) => {
@@ -20,6 +24,8 @@ const renderChildPage = (routerTree: GenRouterTypeMain) => {
       return <PageBaseUpload />;
     case "upload-wrapper":
       return <PageUploadWrapper />;
+    case "dragger-upload":
+      return <DraggerUpload />;
     default:
       return <HashRedirect to={genRouter.baseUpload.path()} noDelay />;
   }
