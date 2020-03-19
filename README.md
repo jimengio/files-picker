@@ -22,11 +22,12 @@ getDownloadUrl;
 getUploadUrl;
 ```
 
-当前模块提供了三个组件:
+当前模块提供了四个组件:
 
 - `UploadWrapper` 可以包裹一个 ReactNode, 点击该区域得到 `files` 变量.
 - `BaseUpload` 封装了一个上传组件.
 - `BaseDisplay` 封装了一个用于下载的组件.
+- `DraggerUpload` 封装了一个可以拖拽文件上传的组件。
 
 ### 图片缩放
 
