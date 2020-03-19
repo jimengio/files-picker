@@ -58,6 +58,7 @@
     "webpack-hud": "^0.1.2"
   },
   "dependencies": {
+    "@jimengio/jimo-icons": "^0.3.8-a1",
     "@jimengio/ruled-router": "^0.2.25",
     "dayjs": "^1.8.23",
     "emotion": "^10.0.27",
