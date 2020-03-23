@@ -27,11 +27,11 @@ export let genRouter = {
     path: () => `/upload-wrapper`,
     go: () => switchPath(`/upload-wrapper`),
   },
-  draggerUpload: {
-    name: "dragger-upload",
-    raw: "dragger-upload",
-    path: () => `/dragger-upload`,
-    go: () => switchPath(`/dragger-upload`),
+  dropzone: {
+    name: "dropzone",
+    raw: "dropzone",
+    path: () => `/dropzone`,
+    go: () => switchPath(`/dropzone`),
   },
   $: {
     name: "home",
@@ -41,11 +41,7 @@ export let genRouter = {
   },
 };
 
-export type GenRouterTypeMain =
-  | GenRouterTypeTree["baseUpload"]
-  | GenRouterTypeTree["uploadWrapper"]
-  | GenRouterTypeTree["draggerUpload"]
-  | GenRouterTypeTree["$"];
+export type GenRouterTypeMain = GenRouterTypeTree["baseUpload"] | GenRouterTypeTree["uploadWrapper"] | GenRouterTypeTree["dropzone"] | GenRouterTypeTree["$"];
 
 export interface GenRouterTypeTree {
   baseUpload: {
@@ -60,8 +56,8 @@ export interface GenRouterTypeTree {
     query: {};
     next: null;
   };
-  draggerUpload: {
-    name: "dragger-upload";
+  dropzone: {
+    name: "dropzone";
     params: {};
     query: {};
     next: null;
