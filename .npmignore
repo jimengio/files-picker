@@ -9,3 +9,6 @@ template.ejs
 tsconfig.json
 webpack
 yarn.lock
+
+.github/
+tsconfig*.json
