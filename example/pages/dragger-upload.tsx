@@ -25,7 +25,7 @@ let title = `点击或将文件拖拽到这里上传`;
 let subTitle = `支持格式：jpeg/png/png；word：doc/docx；excel：xlsx/xlsm/xlsb/csv；pdf；ppt：ppt/pptx，大小不超过100M`;
 
 let code = `
-<DraggerUpload title={${title}} subTitle={${subTitle}} />
+<DraggerUpload title={\${title}} subTitle={\${subTitle}} />
 `;
 
 let content = `
