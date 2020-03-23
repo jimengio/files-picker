@@ -160,6 +160,11 @@
   resolved "https://registry.npmjs.org/@jimengio/flex-styles/-/flex-styles-0.1.6.tgz#d37e37aa4a85c72feff386c27b920a5f8c5f6335"
   integrity sha512-K5Ij+DrkQFgMc4MMWJOCsI8S26xUy6a1fe0JWEtQjwhrEGXwGv/w4coD19+uMcqtLO1HHasfN2NuoJNSh9g5ag==
 
+"@jimengio/jimo-icons@^0.3.8-a1":
+  version "0.3.8-a1"
+  resolved "https://registry.npm.taobao.org/@jimengio/jimo-icons/download/@jimengio/jimo-icons-0.3.8-a1.tgz#b3bd4d40e95f6ac5341df0f10b4718017a074c73"
+  integrity sha1-s71NQOlfasU0HfDxC0cYAXoHTHM=
+
 "@jimengio/router-code-generator@^0.2.6":
   version "0.2.6"
   resolved "https://registry.npmjs.org/@jimengio/router-code-generator/-/router-code-generator-0.2.6.tgz#946c347a2e8d2f278e1d0c4ac29587856f844a0d"

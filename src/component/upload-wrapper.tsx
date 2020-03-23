@@ -4,7 +4,7 @@
  * 当前组件主要用于对组件进行包裹, 然后选择文件用于上传.
  * 提供一个 <input/> 用于触发文件选取. 内部的 UI 通过 props.children 传入.
  */
-import React, { CSSProperties, FC, useState } from "react";
+import React, { CSSProperties, FC, useState, useRef } from "react";
 import { css, cx } from "emotion";
 
 import { message } from "antd";
@@ -29,18 +29,20 @@ interface IProps {
 
 let UploadWrapper: FC<IProps> = React.memo((props) => {
   let [isRefreshing, setRefreshing] = useState(false);
+  let inputElement = useRef(null);
 
   /** Plugins */
   /** Methods */
   /** Effects */
   /** Renderers */
   return (
-    <div className={cx(styleWrapper, props.className)}>
+    <div className={cx(styleWrapper, props.className)} onClick={() => inputElement.current.click()}>
       {props.children}
       {!isRefreshing && (
         <input
           title=""
           className={styleInput}
+          ref={inputElement}
           type="file"
           accept={props.accept}
           multiple={props.multiple}
@@ -96,4 +98,5 @@ const styleInput = css`
   font-size: 100px;
   cursor: pointer;
   opacity: 0;
+  z-index: -1;
 `;
