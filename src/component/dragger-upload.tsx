@@ -181,8 +181,10 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
           style={dragenter ? { borderColor: "#3674ff" } : { borderColor: "#e8e8e8" }}
         >
           <JimoIcon name={EJimoIcon.uploadBox} className={styleUploadIcon} />
-          <span className="title">{props.title || uploadingLocales.draggerUploadTitle}</span>
-          <span className="subTitle">{props.subTitle}</span>
+          <Space height={8} />
+          <span className={styleTitle}>{props.title || uploadingLocales.draggerUploadTitle}</span>
+          <Space height={8} />
+          <span className={styleSubTitle}>{props.subTitle}</span>
         </div>
       </UploadWrapper>
       <div className={cx(column)}>
@@ -195,11 +197,11 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
                 {item.name}
               </span>
               <span>
-                <span className="icon" onClick={() => reqDownload(item.filePath)}>
+                <span className={styleIcon} onClick={() => reqDownload(item.filePath)}>
                   <Icon type="download" />
                 </span>
                 <Space width={10} />
-                <span className="icon" onClick={() => delFile(item.filePath)}>
+                <span className={styleIcon} onClick={() => delFile(item.filePath)}>
                   <Icon type="close" />
                 </span>
               </span>
@@ -225,20 +227,21 @@ let styleContainer = css`
   :hover {
     border-color: #3674ff !important;
   }
+`;
 
-  .title {
-    color: #323232;
-    font-size: 16px;
-    pointer-events: none;
-  }
+let styleTitle = css`
+  color: #323232;
+  font-size: 16px;
+  line-height: 22px;
+  pointer-events: none;
+`;
 
-  .subTitle {
-    font-size: 12px;
-    line-height: 22px;
-    color: #979797;
-    text-align: left;
-    pointer-events: none;
-  }
+let styleSubTitle = css`
+  font-size: 12px;
+  line-height: 22px;
+  color: #979797;
+  text-align: left;
+  pointer-events: none;
 `;
 
 let styleUploadItem = css`
@@ -249,15 +252,17 @@ let styleUploadItem = css`
   :hover {
     background: rgb(242, 245, 251);
   }
+`;
 
-  .icon {
-    font-size: 12px;
-    cursor: pointer;
-  }
+let styleIcon = css`
+  font-size: 12px;
+  cursor: pointer;
 `;
 
 let styleUploadIcon = css`
   color: #3674ff;
-  font-size: 50px;
+  font-size: 48px;
+  height: 48px;
+  line-height: 48px;
   pointer-events: none;
 `;
