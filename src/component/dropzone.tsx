@@ -13,6 +13,7 @@ import { download } from "../util";
 
 interface IProps {
   className?: string;
+  areaClassName?: string;
   title?: string;
   subTitle?: string;
   accept?: string;
@@ -39,7 +40,7 @@ interface IUploadItem {
   filePath?: string;
 }
 
-let DraggerUpload: FC<IProps> = React.memo((props) => {
+let Dropzone: FC<IProps> = React.memo((props) => {
   const { maxSize = 10 } = props;
 
   let uploadElement = useRef({} as any);
@@ -82,7 +83,7 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
 
     if (fileList.length > 0) {
       if (fileList.length > 1 && !props.multiple) {
-        message.warning(uploadingLocales.draggerUploadMultipleHint);
+        message.warning(uploadingLocales.dropzoneWarnMultiple);
       } else {
         let files: File[] = [];
         let resArray: string[] = [];
@@ -151,11 +152,7 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
   };
 
   return (
-    <div
-      className={css`
-        display: inline-block;
-      `}
-    >
+    <div className={cx(styleContainer, props.className)}>
       <UploadWrapper
         accept={props.accept}
         acceptedFileTypes={props.acceptedFileTypes}
@@ -176,13 +173,15 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
         }}
       >
         <div
-          className={cx(center, styleContainer, props.className)}
+          className={cx(center, styleDropArea, props.areaClassName)}
           ref={uploadElement}
           style={dragenter ? { borderColor: "#3674ff" } : { borderColor: "#e8e8e8" }}
         >
           <JimoIcon name={EJimoIcon.uploadBox} className={styleUploadIcon} />
-          <span className="title">{props.title || uploadingLocales.draggerUploadTitle}</span>
-          <span className="subTitle">{props.subTitle}</span>
+          <Space height={8} />
+          <span className={styleTitle}>{props.title || uploadingLocales.dropzoneTitle}</span>
+          <Space height={8} />
+          <span className={styleSubTitle}>{props.subTitle}</span>
         </div>
       </UploadWrapper>
       <div className={cx(column)}>
@@ -195,11 +194,11 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
                 {item.name}
               </span>
               <span>
-                <span className="icon" onClick={() => reqDownload(item.filePath)}>
+                <span className={styleIcon} onClick={() => reqDownload(item.filePath)}>
                   <Icon type="download" />
                 </span>
                 <Space width={10} />
-                <span className="icon" onClick={() => delFile(item.filePath)}>
+                <span className={styleIcon} onClick={() => delFile(item.filePath)}>
                   <Icon type="close" />
                 </span>
               </span>
@@ -211,34 +210,35 @@ let DraggerUpload: FC<IProps> = React.memo((props) => {
   );
 });
 
-export default DraggerUpload;
+export default Dropzone;
 
-let styleContainer = css`
-  width: 360px;
-  height: 200px;
+let styleDropArea = css`
+  min-width: 360px;
+  min-height: 140px;
   border: 1px dashed;
   border-radius: 4px;
   background: #f5f5f5;
   transition: 240ms;
   text-align: center;
-  padding: 0 37px;
+  padding: 24px 36px;
   :hover {
     border-color: #3674ff !important;
   }
+`;
 
-  .title {
-    color: #323232;
-    font-size: 16px;
-    pointer-events: none;
-  }
+let styleTitle = css`
+  color: #323232;
+  font-size: 16px;
+  line-height: 22px;
+  pointer-events: none;
+`;
 
-  .subTitle {
-    font-size: 12px;
-    line-height: 22px;
-    color: #979797;
-    text-align: left;
-    pointer-events: none;
-  }
+let styleSubTitle = css`
+  font-size: 12px;
+  line-height: 22px;
+  color: #979797;
+  text-align: left;
+  pointer-events: none;
 `;
 
 let styleUploadItem = css`
@@ -249,15 +249,19 @@ let styleUploadItem = css`
   :hover {
     background: rgb(242, 245, 251);
   }
+`;
 
-  .icon {
-    font-size: 12px;
-    cursor: pointer;
-  }
+let styleIcon = css`
+  font-size: 12px;
+  cursor: pointer;
 `;
 
 let styleUploadIcon = css`
   color: #3674ff;
-  font-size: 50px;
+  font-size: 48px;
+  height: 48px;
+  line-height: 48px;
   pointer-events: none;
 `;
+
+let styleContainer = css``;

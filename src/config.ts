@@ -7,8 +7,8 @@ export let uploadingLocales = {
   maxFileSizeHint: "已超过最大文件大小限制，限制为：{size}",
   error: "异常",
   unsupportedFileType: "不支持该文件类型，仅支持{type}",
-  draggerUploadTitle: "点击或将文件拖拽到这里上传",
-  draggerUploadMultipleHint: "不支持多文件上传",
+  dropzoneTitle: "点击或将文件拖拽到这里上传",
+  dropzoneWarnMultiple: "不支持多文件上传",
   uploadFailure: "上传失败",
   downloadFailure: "下载失败",
 };

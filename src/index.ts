@@ -1,7 +1,7 @@
 export { default as BaseUpload } from "./component/base-upload";
 export { default as BaseDisplay } from "./component/base-display";
 export { default as UploadWrapper } from "./component/upload-wrapper";
-export { default as DraggerUpload } from "./component/dragger-upload";
+export { default as Dropzone } from "./component/dropzone";
 
 export { uploadByUrl, getDownloadUrl, getUploadUrl } from "./api";
 export { useDownloadApi, useUploadApi } from "./hooks";
