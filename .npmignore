@@ -1,14 +1,19 @@
+node_modules
 .cache-loader
 .editorconfig
 .gitattributes
 .gitignore
 .prettierrc
+.github/
+.DS_Store
+
 dist
 example
 template.ejs
-tsconfig.json
 webpack
-yarn.lock
+src
 
-.github/
+tsconfig.json
 tsconfig*.json
+
+yarn.lock
