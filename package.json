@@ -1,6 +1,6 @@
 {
   "name": "@jimengio/files-picker",
-  "version": "0.0.1-a7",
+  "version": "0.0.1-a8",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -20,12 +20,14 @@
   "author": "JimengIO",
   "license": "MIT",
   "peerDependencies": {
+    "@jimengio/flex-styles": "^0.1.6",
     "@jimengio/jimo-icons": "^0.2.0",
+    "antd": "3.x.x",
+    "emotion": "^10.0.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },
   "devDependencies": {
-    "@jimengio/api-base": "^0.3.1",
     "@jimengio/ci-progress-webpack-plugin": "^0.1.0",
     "@jimengio/doc-frame": "^0.1.11",
     "@jimengio/flex-styles": "^0.1.6",
@@ -48,7 +50,6 @@
     "html-webpack-tags-plugin": "^2.0.17",
     "http-server": "^0.12.1",
     "immer": "^6.0.2",
-    "mime-types": "^2.1.26",
     "mini-css-extract-plugin": "^0.9.0",
     "prettier": "^1.19.1",
     "query-string": "^6.11.1",
@@ -69,5 +70,8 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-hud": "^0.1.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@jimengio/api-base": "^0.3.1",
+    "mime-types": "^2.1.26"
+  }
 }
