@@ -13,7 +13,6 @@ interface IProps {
   url: string;
   downloadUrl: string;
   isEdit?: boolean;
-  category?: string;
   onUploaded?: (uploadRes: string[]) => void;
   initPath?: string[];
   fileType?: string[];
@@ -26,7 +25,7 @@ interface IProps {
 
 const defaultFileType = [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".txt", ".zip", ".7z", ".tar"];
 let BaseUpload: FC<IProps> = React.memo((props) => {
-  const { category, onUploaded, isEdit = false, initPath, fileType = defaultFileType, maxSize = 10, fileListWidth, disabled, text, description } = props;
+  const { onUploaded, isEdit = false, initPath, fileType = defaultFileType, maxSize = 10, fileListWidth, disabled, text, description } = props;
 
   const fileRef = useRef(null);
   const [filePath, setFilePath] = useState<string[]>(initPath);
@@ -106,7 +105,7 @@ let BaseUpload: FC<IProps> = React.memo((props) => {
               message.warning(interpolateLocale(uploadingLocales.maxFileSizeHint, { size: `${maxSize}m` }));
               return;
             }
-            const uploadResult = await uploadingResource.startUpload(props.url, file.name, category, file);
+            const uploadResult = await uploadingResource.startUpload(props.url, file.name, file);
 
             setFilePath(Array.isArray(filePath) ? [...filePath, uploadResult] : [uploadResult]);
             setFileName([...fileName, file.name]);

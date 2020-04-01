@@ -1,6 +1,6 @@
 export interface IUpload {
   fileUrl: string;
-  filePath: string;
+  key: string;
 }
 
 export interface IDownload {

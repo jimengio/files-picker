@@ -25,7 +25,6 @@ interface IProps {
    */
   url?: string;
   downloadUrl?: string;
-  category?: string;
   onUploaded?: (uploadRes: string[], fileList: File[]) => void;
 }
 
@@ -126,7 +125,7 @@ let Dropzone: FC<IProps> = React.memo((props) => {
 
   let reqUpload = async (file: File) => {
     try {
-      const uploadResult = await uploadingResource.startUpload(props.url, file.name, props.category, file);
+      const uploadResult = await uploadingResource.startUpload(props.url, file.name, file);
 
       setUploadList([...uploadList, { name: file.name, state: EUploadState.success, filePath: uploadResult }]);
 
