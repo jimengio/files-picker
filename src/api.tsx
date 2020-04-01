@@ -5,15 +5,15 @@ import { apiHost } from "./config";
 
 import mime from "mime-types";
 
-export const getUploadUrl = async (url: string, fileName: string, category: string) => {
-  return get<IUpload>({
+export const uploadSign = async (url: string, fileName: string) => {
+  return post<IUpload>({
     baseURL: apiHost,
     url,
-    query: { fileName, category },
+    data: { fileName },
   });
 };
 
-export const uploadByUrl = async (fileUrl: string, file: File, fileName: string) => {
+export const uploadByUrl = async (fileUrl: string, file: File) => {
   return put<void>({
     url: fileUrl,
     data: file,
@@ -23,10 +23,10 @@ export const uploadByUrl = async (fileUrl: string, file: File, fileName: string)
   });
 };
 
-export const getDownloadUrl = async (url: string, filePath: string) => {
+export const getDownloadUrl = async (url: string, key: string) => {
   return get<IDownload>({
     baseURL: apiHost,
     url,
-    query: { filePath },
+    query: { key },
   });
 };

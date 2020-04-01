@@ -1,20 +1,20 @@
-import { getUploadUrl, uploadByUrl, getDownloadUrl } from "./api";
+import { uploadSign, uploadByUrl, getDownloadUrl } from "./api";
 import { useState } from "react";
 
 export const useUploadApi = () => {
   let [isLoading, setLoading] = useState(false);
 
-  const startUpload = async (url: string, fileName: string, category: string, file: File) => {
+  const startUpload = async (url: string, fileName: string, file: File) => {
     try {
       if (isLoading) return;
 
       setLoading(true);
 
-      const uploadUrl = await getUploadUrl(url, fileName, category);
+      const uploadUrl = await uploadSign(url, fileName);
 
-      await uploadByUrl(uploadUrl.fileUrl, file, fileName);
+      await uploadByUrl(uploadUrl.fileUrl, file);
 
-      return uploadUrl.filePath;
+      return uploadUrl.key;
     } catch (error) {
       console.error(error);
       throw error;
