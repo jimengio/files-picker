@@ -41,7 +41,7 @@ getUploadUrl;
 processImageUrl(imageUrl, "100");
 ```
 
-完整文档 https://demo-tasks.com/pages/viewpage.action?pageId=22708556
+完整文档参考内部文档 `?pageId=22708556`
 
 ```
 //  100         - 100 pixels square, cropping as needed
