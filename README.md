@@ -4,6 +4,8 @@
 
 ### 用法
 
+![](https://img.shields.io/npm/v/@jimengio/files-picker.svg?style=flat-square)
+
 ```bash
 yarn add @jimengio/files-picker
 ```
