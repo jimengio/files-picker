@@ -1,6 +1,6 @@
 {
   "name": "@jimengio/files-picker",
-  "version": "0.0.1-a12",
+  "version": "0.0.1-a13",
   "description": "",
   "main": "lib/index.js",
   "scripts": {

@@ -29,7 +29,7 @@ interface IProps {
   onError?: (error: EUploadError) => void;
 }
 
-let UploadWrapper: FC<IProps> = React.memo((props) => {
+export let useUploadTrigger = (props: IProps) => {
   let inputElement = useRef(null);
 
   let inputAccepts = props.accept;
@@ -40,6 +40,59 @@ let UploadWrapper: FC<IProps> = React.memo((props) => {
     }
   }
 
+  let ui = (
+    <input
+      title=""
+      className={styleInput}
+      ref={inputElement}
+      type="file"
+      accept={inputAccepts}
+      multiple={props.multiple}
+      onChange={async (e) => {
+        if (props.onChange) {
+          const fileList = Array.from(e.target.files); // copy to array before resetting
+
+          e.target.files = null; // without resetting, not able to trigger a change after failed
+
+          if (fileList.length > 0) {
+            const files: File[] = [];
+
+            fileList.forEach((file) => {
+              const fileExtension = file.name.split(".").pop();
+              if (props.acceptedFileTypes && !props.acceptedFileTypes.includes(fileExtension)) {
+                if (props.onError) {
+                  props.onError(EUploadError.unsupportedFileType);
+                }
+                message.error(interpolateLocale(uploadingLocales.unsupportedFileType, { type: props.acceptedFileTypes.join(", ") }));
+                return;
+              }
+              files.push(file);
+            });
+
+            props.onChange(files);
+          }
+        }
+      }}
+    />
+  );
+
+  let onUpload = () => {
+    if (inputElement.current != null) {
+      inputElement.current.click();
+    } else {
+      console.error("input element for files is not mounted!");
+    }
+  };
+
+  return {
+    ui,
+    onUpload,
+  };
+};
+
+let UploadWrapper: FC<IProps> = React.memo((props) => {
+  let uploadPlugin = useUploadTrigger(props);
+
   /** Plugins */
   /** Methods */
   /** Effects */
@@ -48,48 +101,11 @@ let UploadWrapper: FC<IProps> = React.memo((props) => {
     <div
       className={cx(styleWrapper, props.className)}
       onClick={() => {
-        if (inputElement.current != null) {
-          inputElement.current.click();
-        } else {
-          console.error("Input element is missing in upload wrapper");
-        }
+        uploadPlugin.onUpload();
       }}
     >
       {props.children}
-
-      <input
-        title=""
-        className={styleInput}
-        ref={inputElement}
-        type="file"
-        accept={inputAccepts}
-        multiple={props.multiple}
-        onChange={async (e) => {
-          if (props.onChange) {
-            const fileList = Array.from(e.target.files); // copy to array before resetting
-
-            e.target.files = null; // without resetting, not able to trigger a change after failed
-
-            if (fileList.length > 0) {
-              const files: File[] = [];
-
-              fileList.forEach((file) => {
-                const fileExtension = file.name.split(".").pop();
-                if (props.acceptedFileTypes && !props.acceptedFileTypes.includes(fileExtension)) {
-                  if (props.onError) {
-                    props.onError(EUploadError.unsupportedFileType);
-                  }
-                  message.error(interpolateLocale(uploadingLocales.unsupportedFileType, { type: props.acceptedFileTypes.join(", ") }));
-                  return;
-                }
-                files.push(file);
-              });
-
-              props.onChange(files);
-            }
-          }
-        }}
-      />
+      {uploadPlugin.ui}
     </div>
   );
 });
