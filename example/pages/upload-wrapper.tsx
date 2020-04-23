@@ -10,9 +10,6 @@ let PageUploadWrapper: FC<{}> = React.memo((props) => {
 
   let uploadPlugin = useUploadTrigger({
     acceptedFileTypes: ["jpg", "png"],
-    onChange: async (files) => {
-      console.log("files", files);
-    },
   });
 
   /** Methods */
@@ -34,7 +31,14 @@ let PageUploadWrapper: FC<{}> = React.memo((props) => {
       </DocDemo>
 
       <DocDemo title="Upload Trigger">
-        <JimoButton text="点击选取一个文件, 在 Console 查看" onClick={uploadPlugin.onUpload}></JimoButton>
+        <JimoButton
+          text="点击选取一个文件, 在 Console 查看"
+          onClick={(event) => {
+            uploadPlugin.onUpload((files) => {
+              console.log("files", files);
+            });
+          }}
+        ></JimoButton>
         <DocSnippet code={hooksCode} />
         {uploadPlugin.ui}
       </DocDemo>
@@ -61,10 +65,14 @@ UploadWrapper 可以包裹一个区域, 用来获取 File 对象. 得到 File �
 let hooksCode = `
 let uploadPlugin = useUploadTrigger({
   acceptedFileTypes: ["jpg", "png"],
-  onChange: async (files) => {
-    console.log("files", files);
-  },
 });
 
-<JimoButton text="点击选取一个文件, 在 Console 查看" onClick={uploadPlugin.onUpload}></JimoButton>
+<JimoButton
+  text="点击选取一个文件, 在 Console 查看"
+  onClick={(event) => {
+    uploadPlugin.onUpload((files) => {
+      console.log("files", files);
+    });
+  }}
+></JimoButton>
 `;

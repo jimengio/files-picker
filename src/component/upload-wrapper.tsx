@@ -25,12 +25,13 @@ interface IProps {
   accept?: string;
   multiple?: boolean;
   className?: string;
-  onChange: (fileList: File[]) => Promise<void>;
+  onChange?: (fileList: File[]) => Promise<void>;
   onError?: (error: EUploadError) => void;
 }
 
 export let useUploadTrigger = (props: IProps) => {
   let inputElement = useRef(null);
+  let filesHandlerRef = useRef<(files: File[]) => void>(null);
 
   let inputAccepts = props.accept;
 
@@ -49,10 +50,8 @@ export let useUploadTrigger = (props: IProps) => {
       accept={inputAccepts}
       multiple={props.multiple}
       onChange={async (e) => {
-        if (props.onChange) {
+        if (props.onChange || filesHandlerRef.current) {
           const fileList = Array.from(e.target.files); // copy to array before resetting
-
-          e.target.files = null; // without resetting, not able to trigger a change after failed
 
           if (fileList.length > 0) {
             const files: File[] = [];
@@ -69,14 +68,20 @@ export let useUploadTrigger = (props: IProps) => {
               files.push(file);
             });
 
-            props.onChange(files);
+            props.onChange?.(files);
+            filesHandlerRef.current?.(files);
+            filesHandlerRef.current = null;
           }
         }
+
+        // reset selected files to null, or selecting same file will not trigger events
+        e.target.value = "";
       }}
     />
   );
 
-  let onUpload = () => {
+  let onUpload = (onFiles: (files: File[]) => void) => {
+    filesHandlerRef.current = onFiles;
     if (inputElement.current != null) {
       inputElement.current.click();
     } else {
@@ -101,7 +106,7 @@ let UploadWrapper: FC<IProps> = React.memo((props) => {
     <div
       className={cx(styleWrapper, props.className)}
       onClick={() => {
-        uploadPlugin.onUpload();
+        uploadPlugin.onUpload(null);
       }}
     >
       {props.children}
