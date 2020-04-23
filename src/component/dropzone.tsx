@@ -9,7 +9,7 @@ import JimoIcon, { EJimoIcon } from "@jimengio/jimo-icons";
 import { interpolateLocale } from "../util";
 import { uploadingLocales } from "../config";
 import { useUploadApi, useDownloadApi } from "../hooks";
-import { download } from "../util";
+import { downloadAsFile } from "../util";
 
 interface IProps {
   className?: string;
@@ -139,7 +139,7 @@ let Dropzone: FC<IProps> = React.memo((props) => {
   let reqDownload = async (path: string) => {
     try {
       const downloadUrl = await downloadingResource.startDownload(props.downloadUrl, path);
-      download(downloadUrl);
+      downloadAsFile(downloadUrl);
     } catch (error) {
       console.error(error);
       message.error(uploadingLocales.downloadFailure);

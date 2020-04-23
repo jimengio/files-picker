@@ -1,4 +1,8 @@
-export const download = (url: string, fileName?: string) => {
+/**
+ * Use this paired with Content-Disposition
+ * https://stackoverflow.com/a/9195376/883571
+ */
+export const downloadAsFile = (url: string, fileName?: string) => {
   const a = document.createElement("a");
   a.href = url;
   a.setAttribute("download", "true");
@@ -19,7 +23,7 @@ export const getAttachmentName = (attach: string): string => {
 
 export const downloadByBlob = (data: Blob, fileName?: string) => {
   const url = URL.createObjectURL(data);
-  download(url, fileName);
+  downloadAsFile(url, fileName);
 };
 
 export function interpolateLocale(template: string, data: { [k: string]: any }) {
