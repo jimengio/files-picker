@@ -16,67 +16,80 @@ export enum EUploadError {
 }
 
 interface IProps {
+  /** array of extnames without dots, for example `["png", "pdf"]` */
+  acceptedFileTypes?: string[];
   /**
    * input accept https://stackoverflow.com/a/10503561
+   * if not set, it will be generated from `acceptedFileTypes`
    */
   accept?: string;
   multiple?: boolean;
   className?: string;
-  acceptedFileTypes?: string[];
   onChange: (fileList: File[]) => Promise<void>;
   onError?: (error: EUploadError) => void;
 }
 
 let UploadWrapper: FC<IProps> = React.memo((props) => {
-  let [isRefreshing, setRefreshing] = useState(false);
   let inputElement = useRef(null);
+
+  let inputAccepts = props.accept;
+
+  if (props.accept == null) {
+    if (props.acceptedFileTypes != null) {
+      inputAccepts = props.acceptedFileTypes.map((x) => `.${x}`).join(",");
+    }
+  }
 
   /** Plugins */
   /** Methods */
   /** Effects */
   /** Renderers */
   return (
-    <div className={cx(styleWrapper, props.className)} onClick={() => inputElement.current.click()}>
+    <div
+      className={cx(styleWrapper, props.className)}
+      onClick={() => {
+        if (inputElement.current != null) {
+          inputElement.current.click();
+        } else {
+          console.error("Input element is missing in upload wrapper");
+        }
+      }}
+    >
       {props.children}
-      {!isRefreshing && (
-        <input
-          title=""
-          className={styleInput}
-          ref={inputElement}
-          type="file"
-          accept={props.accept}
-          multiple={props.multiple}
-          onChange={async (e) => {
-            if (props.onChange) {
-              const fileList = Array.from(e.target.files); // copy to array before resetting
 
-              e.target.files = null; // without resetting, not able to trigger a change after failed
+      <input
+        title=""
+        className={styleInput}
+        ref={inputElement}
+        type="file"
+        accept={inputAccepts}
+        multiple={props.multiple}
+        onChange={async (e) => {
+          if (props.onChange) {
+            const fileList = Array.from(e.target.files); // copy to array before resetting
 
-              if (fileList.length > 0) {
-                const files: File[] = [];
+            e.target.files = null; // without resetting, not able to trigger a change after failed
 
-                fileList.forEach((file) => {
-                  const fileExtension = file.name.split(".").pop();
-                  if (props.acceptedFileTypes && !props.acceptedFileTypes.includes(fileExtension)) {
-                    if (props.onError) {
-                      props.onError(EUploadError.unsupportedFileType);
-                    }
-                    message.error(interpolateLocale(uploadingLocales.unsupportedFileType, { type: props.acceptedFileTypes.join(", ") }));
-                    return;
+            if (fileList.length > 0) {
+              const files: File[] = [];
+
+              fileList.forEach((file) => {
+                const fileExtension = file.name.split(".").pop();
+                if (props.acceptedFileTypes && !props.acceptedFileTypes.includes(fileExtension)) {
+                  if (props.onError) {
+                    props.onError(EUploadError.unsupportedFileType);
                   }
-                  files.push(file);
-                });
+                  message.error(interpolateLocale(uploadingLocales.unsupportedFileType, { type: props.acceptedFileTypes.join(", ") }));
+                  return;
+                }
+                files.push(file);
+              });
 
-                setRefreshing(true);
-
-                await props.onChange(files);
-
-                setRefreshing(false);
-              }
+              props.onChange(files);
             }
-          }}
-        />
-      )}
+          }
+        }}
+      />
     </div>
   );
 });
@@ -99,4 +112,5 @@ const styleInput = css`
   cursor: pointer;
   opacity: 0;
   z-index: -1;
+  display: none;
 `;
