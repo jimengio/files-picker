@@ -42,37 +42,12 @@ interface IUploadItem {
 let Dropzone: FC<IProps> = React.memo((props) => {
   const { maxSize = 10 } = props;
 
-  let uploadElement = useRef({} as any);
   let [dragenter, setDragenter] = useState<boolean>(false);
   let [uploadList, setUploadList] = useState<IUploadItem[]>([]);
   let uploadingResource = useUploadApi();
   let downloadingResource = useDownloadApi();
 
-  useEffect(() => {
-    const dropbox = uploadElement.current;
-    dropbox.addEventListener("dragenter", onDragenter);
-    dropbox.addEventListener("dragleave", onDragleave);
-    dropbox.addEventListener("drop", onDrop);
-
-    document.addEventListener("dragover", onDragover);
-    return () => {
-      dropbox.removeEventListener("dragenter", onDragenter);
-      dropbox.removeEventListener("dragleave", onDragleave);
-      dropbox.removeEventListener("drop", onDrop);
-
-      document.removeEventListener("dragover", onDragover);
-    };
-  }, []);
-
-  let onDragenter = (e) => {
-    setDragenter(true);
-  };
-
-  let onDragleave = (e) => {
-    setDragenter(false);
-  };
-
-  let onDrop = (e) => {
+  let onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -107,13 +82,7 @@ let Dropzone: FC<IProps> = React.memo((props) => {
     }
   };
 
-  let onDragover = (e) => {
-    // 阻止拖入浏览器后触发下载
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  let judgeSize = (fileSize) => {
+  let judgeSize = (fileSize: number) => {
     const resultSize = fileSize / 1024 / 1024;
     if (resultSize >= maxSize) {
       message.warning(interpolateLocale(uploadingLocales.maxFileSizeHint, { size: `${maxSize}m` }));
@@ -173,7 +142,18 @@ let Dropzone: FC<IProps> = React.memo((props) => {
       >
         <div
           className={cx(center, styleDropArea, props.areaClassName)}
-          ref={uploadElement}
+          onDragEnter={(e) => {
+            setDragenter(true);
+          }}
+          onDragLeave={(e) => {
+            setDragenter(false);
+          }}
+          onDrop={onDrop}
+          onDragOver={(e) => {
+            // 阻止拖入浏览器后触发下载
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           style={dragenter ? { borderColor: "#3674ff" } : { borderColor: "#e8e8e8" }}
         >
           <JimoIcon name={EJimoIcon.uploadBox} className={styleUploadIcon} />
