@@ -4,7 +4,7 @@ import { css } from "emotion";
 import { Icon } from "antd";
 import { Space } from "@jimengio/flex-styles";
 import { useDownloadApi } from "../hooks";
-import { download } from "../util";
+import { downloadAsFile } from "../util";
 
 interface IProps {
   url: string;
@@ -34,7 +34,7 @@ let BaseDisplay: FC<IProps> = React.memo((props) => {
                 className={style.mouse}
                 onClick={async () => {
                   const downloadUrl = await downloadingResource.startDownload(props.url, path);
-                  download(downloadUrl);
+                  downloadAsFile(downloadUrl);
                 }}
               />
               {readOnly ? null : (

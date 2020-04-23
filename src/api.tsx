@@ -1,4 +1,4 @@
-import { get, put, post } from "@jimengio/api-base";
+import { get, put, post, IJimuApiOption } from "@jimengio/api-base";
 import { IUpload, IDownload } from "./model";
 
 import { apiHost } from "./config";
@@ -13,13 +13,14 @@ export const uploadSign = async (url: string, fileName: string) => {
   });
 };
 
-export const uploadByUrl = async (fileUrl: string, file: File) => {
+export const uploadByUrl = async (fileUrl: string, file: File, options?: IJimuApiOption) => {
   return put<void>({
     url: fileUrl,
     data: file,
     headers: {
       "Content-Type": mime.contentType(file.type),
     },
+    ...options,
   });
 };
 

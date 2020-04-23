@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import { css } from "emotion";
 import { DocDemo, DocSnippet, DocBlock } from "@jimengio/doc-frame";
 import { UploadWrapper } from "../../src";
+import { Button } from "antd";
+import { JimoButton } from "@jimengio/jimo-basics";
 
 let PageUploadWrapper: FC<{}> = React.memo((props) => {
   /** Plugins */
@@ -14,11 +16,12 @@ let PageUploadWrapper: FC<{}> = React.memo((props) => {
         <DocBlock content={content} />
         <DocSnippet code={code} />
         <UploadWrapper
+          acceptedFileTypes={["jpg", "png"]}
           onChange={async (files) => {
             console.log("files", files);
           }}
         >
-          <div>点击选取一个文件, 在 Console 查看</div>
+          <JimoButton text="点击选取一个文件, 在 Console 查看" onClick={() => {}}></JimoButton>
         </UploadWrapper>
       </DocDemo>
     </div>

@@ -6,3 +6,5 @@ export { default as Dropzone } from "./component/dropzone";
 export { uploadByUrl, getDownloadUrl, uploadSign } from "./api";
 export { useDownloadApi, useUploadApi } from "./hooks";
 export { processImageUrl } from "./util/image";
+
+export { downloadAsFile } from "./util";

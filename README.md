@@ -20,6 +20,7 @@ configureUploading({ apiHost: "https://demo-host.com", locales: {} });
 uploadByUrl;
 getDownloadUrl;
 getUploadUrl;
+downloadAsFile;
 ```
 
 当前模块提供了四个组件:
