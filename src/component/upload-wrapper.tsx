@@ -58,7 +58,7 @@ export let useUploadTrigger = (props: IProps) => {
 
             fileList.forEach((file) => {
               const fileExtension = file.name.split(".").pop();
-              if (props.acceptedFileTypes && !props.acceptedFileTypes.includes(fileExtension)) {
+              if (props.acceptedFileTypes && !props.acceptedFileTypes.includes(fileExtension.toLowerCase())) {
                 if (props.onError) {
                   props.onError(EUploadError.unsupportedFileType);
                 }
