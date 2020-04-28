@@ -26,7 +26,7 @@ let PageUploadWrapper: FC<{}> = React.memo((props) => {
             console.log("files", files);
           }}
         >
-          <JimoButton text="点击选取一个文件, 在 Console 查看" onClick={() => {}}></JimoButton>
+          <JimoButton text="点击选取一个文件, 在 Console 查看" onClick={null}></JimoButton>
         </UploadWrapper>
       </DocDemo>
 
