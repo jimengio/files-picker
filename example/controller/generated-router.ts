@@ -12,7 +12,7 @@ function qsStringify(queries: { [k: string]: any }) {
 
 // generated
 
-// Generated with router-code-generator@0.2.6
+// Generated with router-code-generator@0.2.7
 
 export let genRouter = {
   baseUpload: {
@@ -41,9 +41,11 @@ export let genRouter = {
   },
 };
 
-export type GenRouterTypeMain = GenRouterTypeTree["baseUpload"] | GenRouterTypeTree["uploadWrapper"] | GenRouterTypeTree["dropzone"] | GenRouterTypeTree["$"];
+/** Deprecating, use GenRouterTypeTree["next"] instead */
+export type GenRouterTypeMain = GenRouterTypeTree["next"];
 
 export interface GenRouterTypeTree {
+  next: GenRouterTypeTree["baseUpload"] | GenRouterTypeTree["uploadWrapper"] | GenRouterTypeTree["dropzone"] | GenRouterTypeTree["$"];
   baseUpload: {
     name: "base-upload";
     params: {};
