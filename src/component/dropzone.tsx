@@ -3,7 +3,8 @@ import { css, cx } from "emotion";
 import { center, column, Space, rowParted } from "@jimengio/flex-styles";
 
 import UploadWrapper from "./upload-wrapper";
-import { Icon, message } from "antd";
+import { message } from "antd";
+import { LinkOutlined, DownloadOutlined, CloseOutlined } from "@ant-design/icons";
 import JimoIcon, { EJimoIcon } from "@jimengio/jimo-icons";
 
 import { interpolateLocale } from "../util";
@@ -168,17 +169,17 @@ let Dropzone: FC<IProps> = React.memo((props) => {
           return (
             <div key={index} className={cx(rowParted, styleUploadItem)}>
               <span>
-                <Icon type="link" />
+                <LinkOutlined />
                 <Space width={5} />
                 {item.name}
               </span>
               <span>
                 <span className={styleIcon} onClick={() => reqDownload(item.filePath)}>
-                  <Icon type="download" />
+                  <DownloadOutlined />
                 </span>
                 <Space width={10} />
                 <span className={styleIcon} onClick={() => delFile(item.filePath)}>
-                  <Icon type="close" />
+                  <CloseOutlined />
                 </span>
               </span>
             </div>

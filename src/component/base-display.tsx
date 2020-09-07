@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { css } from "emotion";
-import { Icon } from "antd";
+import { PaperClipOutlined, DownloadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Space } from "@jimengio/flex-styles";
 import { useDownloadApi } from "../hooks";
 import { downloadAsFile } from "../util";
@@ -25,12 +25,11 @@ let BaseDisplay: FC<IProps> = React.memo((props) => {
         const name = path.split("/")[2];
         return (
           <div key={index} className={style.fileDiv}>
-            <Icon type="paper-clip" />
+            <PaperClipOutlined />
             <Space width={12} />
             {name}
             <div style={{ float: "right", textAlign: "right" }}>
-              <Icon
-                type="download"
+              <DownloadOutlined
                 className={style.mouse}
                 onClick={async () => {
                   const downloadUrl = await downloadingResource.startDownload(props.url, path);
@@ -40,8 +39,7 @@ let BaseDisplay: FC<IProps> = React.memo((props) => {
               {readOnly ? null : (
                 <>
                   <Space width={15} />
-                  <Icon
-                    type="delete"
+                  <DeleteOutlined
                     className={style.mouse}
                     onClick={() => {
                       onDel(path, name);
