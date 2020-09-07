@@ -3,7 +3,8 @@ import React, { FC, useRef, useEffect, useState } from "react";
 import BaseDisplay from "./base-display";
 
 import { css, cx } from "emotion";
-import { Icon, Spin, message } from "antd";
+import { Spin, message } from "antd";
+import { ExclamationOutlined, UploadOutlined } from "@ant-design/icons";
 import { useUploadApi } from "../hooks";
 
 import { uploadingLocales } from "../config";
@@ -65,7 +66,7 @@ let BaseUpload: FC<IProps> = React.memo((props) => {
           >
             {isEdit ? null : (
               <>
-                <Icon type={error ? "exclamation" : "upload"} /> {text ? text : uploadingLocales.uploadFile}
+                {error ? <ExclamationOutlined /> : <UploadOutlined />} {text ? text : uploadingLocales.uploadFile}
               </>
             )}
           </div>
